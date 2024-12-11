@@ -3,20 +3,20 @@ USE OnlineBookstore;
 
 CREATE TABLE Country
 (
-    Id   INT PRIMARY KEY,
+    Id   INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE City
 (
-    Pincode    INT PRIMARY KEY,
-    Name       VARCHAR(255) NOT NULL,
-    Country    INT
+    Pincode INT PRIMARY KEY AUTO_INCREMENT,
+    Name    VARCHAR(255) NOT NULL,
+    Country INT
 );
 
 CREATE TABLE User
 (
-    Id            INT PRIMARY KEY,
+    Id            INT PRIMARY KEY AUTO_INCREMENT,
     First_Name    VARCHAR(255)               NOT NULL,
     Last_Name     VARCHAR(255),
     Email         VARCHAR(255) UNIQUE        NOT NULL,
@@ -31,13 +31,13 @@ CREATE TABLE User
 
 CREATE TABLE Language
 (
-    Id   INT PRIMARY KEY,
+    Id   INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Book
 (
-    Book_Id          INT PRIMARY KEY,
+    Book_Id          INT PRIMARY KEY AUTO_INCREMENT,
     Title            VARCHAR(255)                                                     NOT NULL,
     Language         INT,
     Publication_Date DATE,
@@ -52,8 +52,8 @@ CREATE TABLE Book
 
 CREATE TABLE Author
 (
-    Author_Id   INT PRIMARY KEY,
-    Book_Id     INT,
+    Author_Id   INT PRIMARY KEY AUTO_INCREMENT,
+    Book_Id     INT          NOT NULL,
     Name        VARCHAR(255) NOT NULL,
     Description VARCHAR(500),
     Photo       BLOB,
@@ -62,9 +62,9 @@ CREATE TABLE Author
 
 CREATE TABLE Review
 (
-    Id          INT PRIMARY KEY,
-    Customer_Id INT,
-    Book_Id     INT,
+    Id          INT PRIMARY KEY AUTO_INCREMENT,
+    Customer_Id INT NOT NULL,
+    Book_Id     INT NOT NULL,
     Review      VARCHAR(1000),
     Date        DATE,
     FOREIGN KEY (Customer_Id) REFERENCES User (Id),
@@ -73,9 +73,9 @@ CREATE TABLE Review
 
 CREATE TABLE Cart
 (
-    Id          INT PRIMARY KEY,
-    User_Id     INT,
-    Book_Id     INT,
+    Id          INT PRIMARY KEY AUTO_INCREMENT,
+    User_Id     INT   NOT NULL,
+    Book_Id     INT   NOT NULL,
     Total_Books INT,
     Total_Price FLOAT NOT NULL,
     Discount    FLOAT
@@ -83,7 +83,7 @@ CREATE TABLE Cart
 
 CREATE TABLE `Order`
 (
-    Id           INT PRIMARY KEY,
+    Id           INT PRIMARY KEY AUTO_INCREMENT,
     Cart_Id      INT,
     Quantity     INT                                                   NOT NULL,
     Customer_Id  INT,
@@ -95,7 +95,7 @@ CREATE TABLE `Order`
 
 CREATE TABLE Payment
 (
-    Id             INT PRIMARY KEY,
+    Id             INT PRIMARY KEY AUTO_INCREMENT,
     Customer_Id    INT,
     Order_Id       INT,
     Status         ENUM ('Success', 'Pending', 'Failed')                                        NOT NULL,
