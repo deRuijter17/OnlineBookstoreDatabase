@@ -53,7 +53,6 @@ CREATE TABLE Book
 CREATE TABLE Author
 (
     Author_Id   INT PRIMARY KEY AUTO_INCREMENT,
-    Book_Id     INT          NOT NULL,
     Name        VARCHAR(255) NOT NULL,
     Description VARCHAR(500),
     Photo       BLOB,
@@ -81,7 +80,7 @@ CREATE TABLE Cart
     Discount    FLOAT
 );
 
-CREATE TABLE `Order`
+CREATE TABLE Orders
 (
     Id           INT PRIMARY KEY AUTO_INCREMENT,
     Cart_Id      INT,
