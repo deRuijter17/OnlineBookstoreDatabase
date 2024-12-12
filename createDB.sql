@@ -1,20 +1,20 @@
-CREATE DATABASE OnlineBookstore;
+CREATE DATABASE IF NOT EXISTS OnlineBookstore;
 USE OnlineBookstore;
 
-CREATE TABLE Country
+CREATE TABLE IF NOT EXISTS Country
 (
     Id   INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE City
+CREATE TABLE IF NOT EXISTS City
 (
     Pincode INT PRIMARY KEY AUTO_INCREMENT,
     Name    VARCHAR(255) NOT NULL,
     Country INT
 );
 
-CREATE TABLE User
+CREATE TABLE IF NOT EXISTS User
 (
     Id            INT PRIMARY KEY AUTO_INCREMENT,
     First_Name    VARCHAR(255)               NOT NULL,
@@ -29,13 +29,13 @@ CREATE TABLE User
     Role          ENUM ('Admin', 'Customer') NOT NULL
 );
 
-CREATE TABLE Language
+CREATE TABLE IF NOT EXISTS Language
 (
     Id   INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Book
+CREATE TABLE IF NOT EXISTS Book
 (
     Book_Id          INT PRIMARY KEY AUTO_INCREMENT,
     Title            VARCHAR(255)                                                     NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE Book
     Genre            ENUM ('Fiction', 'Non-Fiction', 'Science', 'Biography', 'Other') NOT NULL
 );
 
-CREATE TABLE Author
+CREATE TABLE IF NOT EXISTS Author
 (
     Author_Id   INT PRIMARY KEY AUTO_INCREMENT,
     Name        VARCHAR(255) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE Author
     DOB         DATE
 );
 
-CREATE TABLE Review
+CREATE TABLE IF NOT EXISTS Review
 (
     Id          INT PRIMARY KEY AUTO_INCREMENT,
     Customer_Id INT NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE Review
     FOREIGN KEY (Book_Id) REFERENCES Book (Book_Id)
 );
 
-CREATE TABLE Cart
+CREATE TABLE IF NOT EXISTS Cart
 (
     Id          INT PRIMARY KEY AUTO_INCREMENT,
     User_Id     INT   NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE Cart
     Discount    FLOAT
 );
 
-CREATE TABLE Orders
+CREATE TABLE IF NOT EXISTS Orders
 (
     Id           INT PRIMARY KEY AUTO_INCREMENT,
     Cart_Id      INT,
@@ -92,7 +92,7 @@ CREATE TABLE Orders
     Payment      BOOLEAN                                               NOT NULL
 );
 
-CREATE TABLE Payment
+CREATE TABLE IF NOT EXISTS Payment
 (
     Id             INT PRIMARY KEY AUTO_INCREMENT,
     Customer_Id    INT,
