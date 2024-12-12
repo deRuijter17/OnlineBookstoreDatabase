@@ -58,23 +58,13 @@ INSERT INTO Review (Review_Id, Customer_Id, Book_Id, Review, Date) VALUES
 (4, 3, 7, 'A timeless romance with witty dialogue and sharp social commentary, highly recommended it!', '2024-12-18'),
 (5, 5, 9, 'A deeply philosophical work that delves into human desires, morality, and the quest for meaning.', '2024-12-19');
 
-INSERT INTO Cart (Cart_Id, User_Id, Book_Id, Total_Books, Total_Price, Discount) VALUES
-(1, 1, 1, 1, 29.99, 0.00),
-(2, 1, 5, 2, 41.98, 2.00),
-(3, 2, 3, 3, 77.97, 5.00),
-(4, 3, 6, 1, 15.99, 0.00),
-(5, 3, 7, 2, 37.98, 1.00),
-(6, 4, 8, 1, 25.99, 0.00),
-(7, 5, 9, 1, 30.00, 0.00),
-(8, 6, 10, 3, 107.97, 3.00);
-
 INSERT INTO Cart (Cart_Id, User_Id, Total_Books, Total_Price, Discount) VALUES
-(1, 4, 1, 29.99, 0.00),
-(2, 2, 2, 41.98, 2.00),
-(3, 1, 3, 77.97, 5.00),
-(4, 5, 1, 15.99, 0.00),
-(5, 6, 2, 37.98, 1.00),
-(6, 3, 3, 107.97, 3.00);
+(1, 4, 1, 25.99, 0.00),
+(2, 2, 3, 77.97, 5.00),
+(3, 1, 3, 71.97, 2.00),
+(4, 5, 1, 30.00, 0.00),
+(5, 6, 3, 107.97, 3.00),
+(6, 3, 3, 53.97, 1.00);
 
 INSERT INTO Wishlist (Cart_Id, Book_Id, Number_Of_Books) VALUES
 (1, 8, 1),
