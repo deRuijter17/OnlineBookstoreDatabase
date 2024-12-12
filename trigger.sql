@@ -9,7 +9,7 @@ BEGIN
     DECLARE book_quantity INT;
     DECLARE new_stock INT;
 
-    -- Lặp qua từng sách trong Cart (thông qua Wishlist) để cập nhật tồn kho
+    -- Lặp qua từng sách trong Cart (trong Wishlist) để cập nhật tồn kho
     DECLARE done INT DEFAULT 0; -- để dừng vòng lặp nếu done = 1
     DECLARE cur CURSOR FOR
         SELECT w.Book_Id, w.Number_of_books
@@ -142,3 +142,29 @@ BEGIN
     WHERE Cart_Id = NEW.Cart_Id;
 END$$
 DELIMITER ;
+
+
+-- Khi payment chuyển thành Success thì đổi payment trong order thành 1
+DROP TRIGGER IF EXISTS tr_update_order_payment_status;
+DELIMITER $$
+
+CREATE TRIGGER tr_update_order_payment_status
+AFTER UPDATE ON Payment
+FOR EACH ROW
+BEGIN
+    -- Kiểm tra nếu trạng thái mới là 'Success'
+    IF NEW.Status = 'Success' AND OLD.Status != 'Success' THEN
+        -- Cập nhật Payment thành 1 trong bảng Orders
+        UPDATE Orders
+        SET Payment = 1
+        WHERE Order_Id = NEW.Order_Id;
+    ELSE
+        UPDATE Orders
+        SET Payment = 0
+        WHERE Order_Id = NEW.Order_Id;
+    END IF;
+END$$
+
+DELIMITER ;
+
+
