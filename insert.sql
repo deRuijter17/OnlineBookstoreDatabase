@@ -27,7 +27,7 @@ INSERT INTO Language (Language_Id, Name) VALUES
 (4, 'German'),
 (5, 'Chinese');
 
-INSERT INTO language (Id, Name) VALUES (6,'Japanese');
+INSERT INTO language (Language_Id, Name) VALUES (6,'Japanese');
 
 
 INSERT INTO Author (Author_Id, Name, Description, Photo, DOB) VALUES
