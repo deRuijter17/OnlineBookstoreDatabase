@@ -25,14 +25,9 @@ INSERT INTO Language (Language_Id, Name) VALUES
 (2, 'Spanish'),
 (3, 'French'),
 (4, 'German'),
-(5, 'Chinese');
+(5, 'Chinese'),
+(6, 'Japanese');
 
-<<<<<<< Updated upstream
-=======
-INSERT INTO language (Language_Id, Name) VALUES (6,'Japanese');
-
-
->>>>>>> Stashed changes
 INSERT INTO Author (Author_Id, Name, Description, Photo, DOB) VALUES
 (1, 'J.K. Rowling', 'Author of Harry Potter series', 'photo1.jpg', '1965-07-31'),
 (2, 'Gabriel García Márquez', 'Author of Cien años de soledad and Love in the Time of Cholera', 'photo2.jpg', '1927-03-06'),
