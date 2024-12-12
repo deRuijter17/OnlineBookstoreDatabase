@@ -14,7 +14,7 @@ BEGIN
 END;
 
 #tăng stock khi đơn hàng bị cancel
-DROP TRIGGER IF EXISTS tr_update_stock_after_order;
+DROP TRIGGER IF EXISTS tr_update_stock_after_cancel_order;
 
 CREATE TRIGGER tr_update_stock_after_cancel_order
 AFTER UPDATE ON Orders
