@@ -27,6 +27,12 @@ INSERT INTO Language (Language_Id, Name) VALUES
 (4, 'German'),
 (5, 'Chinese');
 
+<<<<<<< Updated upstream
+=======
+INSERT INTO language (Language_Id, Name) VALUES (6,'Japanese');
+
+
+>>>>>>> Stashed changes
 INSERT INTO Author (Author_Id, Name, Description, Photo, DOB) VALUES
 (1, 'J.K. Rowling', 'Author of Harry Potter series', 'photo1.jpg', '1965-07-31'),
 (2, 'Gabriel García Márquez', 'Author of Cien años de soledad and Love in the Time of Cholera', 'photo2.jpg', '1927-03-06'),
@@ -63,6 +69,14 @@ INSERT INTO Cart (Cart_Id, User_Id, Total_Books, Total_Price, Discount) VALUES
 (5, 6, 3, 107.97, 3.00),
 (6, 3, 3, 53.97, 1.00);
 
+INSERT INTO Orders (Order_Id, Cart_Id, Customer_Id, Order_Date, Dest_Address, Status, Payment) VALUES
+(1, 3, 1, '2024-11-25', '123 Elm St, New York', 'Shipped', TRUE),
+(2, 2, 2, '2024-12-03', '456 Oak St, London', 'Pending', FALSE),
+(3, 6, 3, '2024-12-07', '789 Pine St, Paris', 'Shipped', TRUE),
+(4, 1, 4, '2024-12-12', '654 Maple St, Berlin', 'Delivered', TRUE),
+(5, 4, 5, '2024-12-13', '321 Cedar St, New York', 'Shipped', TRUE),
+(6, 5, 6, '2024-12-15', '17 Kuomintang St, Shanghai', 'Delivered', TRUE);
+
 INSERT INTO Wishlist (Cart_Id, Book_Id, Number_Of_Books) VALUES
 (1, 8, 1),
 (2, 3, 3),
@@ -73,22 +87,10 @@ INSERT INTO Wishlist (Cart_Id, Book_Id, Number_Of_Books) VALUES
 (6, 6, 1),
 (6, 7, 2);
 
-INSERT INTO Orders (Order_Id, Cart_Id, Customer_Id, Order_Date, Dest_Address, Status, Payment) VALUES
-(1, 1, 1, '2024-11-25', '123 Elm St, New York', 'Shipped', TRUE),
-(2, 2, 1, '2024-11-28', '123 Elm St, New York', 'Shipped', TRUE),
-(3, 3, 2, '2024-12-03', '456 Oak St, London', 'Pending', FALSE),
-(4, 4, 3, '2024-12-07', '789 Pine St, Paris', 'Shipped', TRUE),
-(5, 5, 3, '2024-12-11', '789 Pine St, Paris', 'Shipped', TRUE),
-(6, 6, 4, '2024-12-12', '654 Maple St, Berlin', 'Delivered', TRUE),
-(7, 7, 5, '2024-12-13', '321 Cedar St, New York', 'Shipped', TRUE),
-(8, 8, 6, '2024-12-15', '17 Kuomintang St, Shanghai', 'Delivered', TRUE);
-
 INSERT INTO Payment (Payment_Id, Customer_Id, Order_Id, Status, Payment_Method) VALUES
-(1, 1, 1, 'Success', 'Credit Card'),
-(2, 1, 2, 'Success', 'Debit Card'),
-(3, 2, 3, 'Pending', 'Cash on Delivery'),
-(4, 3, 4, 'Success', 'Credit Card'),
-(5, 3, 5, 'Success', 'Debit Card'),
-(6, 4, 6, 'Success', 'Net Banking'),
-(7, 5, 7, 'Success', 'Cash on Delivery'),
-(8, 6, 8, 'Success', 'Credit Card');
+(1, 1, 1, 'Success', 'Debit Card'),
+(2, 2, 2, 'Pending', 'Cash on Delivery'),
+(3, 3, 3, 'Success', 'Credit Card'),
+(4, 3, 4, 'Success', 'Debit Card'),
+(5, 4, 5, 'Success', 'Net Banking'),
+(6, 5, 6, 'Success', 'Cash on Delivery');
