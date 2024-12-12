@@ -1,23 +1,23 @@
-# Query using inner join.
-# tổng số lượng sách trong giỏ của khách hàng
-SELECT User_Id, First_Name, Last_Name , sum(Total_Books) as total_books FROM cart
-INNER JOIN user on cart.User_Id = user.Id
+-- 7a Query using inner join.
+-- tổng số lượng sách trong giỏ của khách hàng
+SELECT user.User_Id as User_Id , First_Name, Last_Name , sum(Total_Books) as total_books FROM cart
+INNER JOIN user on cart.User_Id = user.User_Id
 where Role = 'Customer'
 GROUP BY User_Id;
 
-#Query using outer join.
-# danh sách ngôn ngữ và book tương ứng
+-- 7b Query using outer join.
+-- danh sách ngôn ngữ và book tương ứng
 
 SELECT book.Title AS book_title, language.Name AS Language
 FROM book
-LEFT JOIN language ON book.Language = language.Id
+LEFT JOIN language ON book.Language = language.Language_Id
 UNION
 SELECT book.Title AS book_title, language.Name AS Language
 FROM book
-RIGHT JOIN language ON book.Language = language.Id;
+RIGHT JOIN language ON book.Language = language.Language_Id;
 
-# Using subquery in where.
-# Tìm những sách được đặt trong các đơn hàng có trạng thái là Shipped
+-- 7c Using subquery in where.
+-- Tìm những sách được đặt trong các đơn hàng có trạng thái là Shipped
 SELECT Title
 FROM book as b
 WHERE b.Book_Id IN (
@@ -25,32 +25,31 @@ WHERE b.Book_Id IN (
     FROM Orders
     WHERE Status = 'Shipped'
 );
-#Tìm sách có giá lớn hơn giá trung bình của tất cả các sách
+-- Tìm sách có giá lớn hơn giá trung bình của tất cả các sách
 SELECT Title, Price
 FROM Book
 WHERE Price > (SELECT AVG(Price) FROM Book);
 
 
-#Tìm người dùng có đánh giá sách theo ID
-DELIMITER $$
-CREATE PROCEDURE GetUsersByBookReview(IN bookId INT)
-BEGIN
-    SELECT
-        First_Name,
-        Last_Name,
-        (SELECT Review
-         FROM Review
-         WHERE Customer_Id = User.Id AND Book_Id = bookId) AS Review
-    FROM User
-    WHERE Id IN (
-        SELECT Customer_Id
-        FROM Review
-        WHERE Book_Id = bookId
+-- Tìm người dùng có đánh giá sách có id là 1
+SELECT
+    First_Name,
+    Last_Name,
+    (SELECT Review
+     FROM Review
+     WHERE Customer_Id = User.User_Id AND Book_Id = 1) AS Review
+FROM User
+WHERE User_Id IN (
+    SELECT Customer_Id
+    FROM Review
+    WHERE Book_Id = 1
+)
+AND EXISTS (
+    SELECT 1
+    FROM Review
+    WHERE Customer_Id = User.User_Id AND Book_Id = 1 AND Review IS NOT NULL
 );
-END $$
-DELIMITER ;
 
-CALL GetUsersByBookReview(1);
 
 -- 7d. Using subquery in from
 -- Mỗi một quyển sách có bao nhiêu lượt review
