@@ -27,4 +27,4 @@ ALTER TABLE Review
 
 ALTER TABLE Wishlist
     ADD CONSTRAINT FK_Wishlist_Cart FOREIGN KEY (Cart_Id) REFERENCES Cart (Cart_Id),
-    ADD CONSTRAINT FK_Wishlist_Book FOREIGN KEY (Book_Id) REFERENCES Book (Book_Id);
+    ADD CONSTRAINT FK_Wishlist_Book FOREIGN KEY (Book_Id) REFERENCES Book (Book_Id)
