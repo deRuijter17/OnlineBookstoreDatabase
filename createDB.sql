@@ -1,20 +1,29 @@
-CREATE DATABASE OnlineBookstore;
+CREATE DATABASE IF NOT EXISTS OnlineBookstore;
 USE OnlineBookstore;
-
-CREATE TABLE Country
+DROP TABLE IF EXISTS Payment;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Cart;
+DROP TABLE IF EXISTS Review;
+DROP TABLE IF EXISTS Book;
+DROP TABLE IF EXISTS Author;
+DROP TABLE IF EXISTS Language;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS City;
+DROP TABLE IF EXISTS Country;
+CREATE TABLE IF NOT EXISTS Country
 (
     Id   INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE City
+CREATE TABLE IF NOT EXISTS City
 (
     Pincode INT PRIMARY KEY AUTO_INCREMENT,
     Name    VARCHAR(255) NOT NULL,
     Country INT
 );
 
-CREATE TABLE User
+CREATE TABLE IF NOT EXISTS User
 (
     Id            INT PRIMARY KEY AUTO_INCREMENT,
     First_Name    VARCHAR(255)               NOT NULL,
@@ -29,28 +38,28 @@ CREATE TABLE User
     Role          ENUM ('Admin', 'Customer') NOT NULL
 );
 
-CREATE TABLE Language
+CREATE TABLE IF NOT EXISTS Language
 (
     Id   INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Book
+CREATE TABLE IF NOT EXISTS Book
 (
     Book_Id          INT PRIMARY KEY AUTO_INCREMENT,
     Title            VARCHAR(255)                                                     NOT NULL,
     Language         INT,
     Publication_Date DATE,
     Author_Id        INT,
-    Price            FLOAT                                                            NOT NULL,
+    Price            FLOAT                                                            NOT NULL CHECK ( Price >= 0 ),
     Image            BLOB,
     Edition          INT,
     Status           BOOLEAN                                                          NOT NULL,
-    Stock            INT                                                              NOT NULL,
+    Stock            INT                                                              NOT NULL CHECK ( Stock >= 0 ),
     Genre            ENUM ('Fiction', 'Non-Fiction', 'Science', 'Biography', 'Other') NOT NULL
 );
 
-CREATE TABLE Author
+CREATE TABLE IF NOT EXISTS Author
 (
     Author_Id   INT PRIMARY KEY AUTO_INCREMENT,
     Name        VARCHAR(255) NOT NULL,
@@ -59,7 +68,7 @@ CREATE TABLE Author
     DOB         DATE
 );
 
-CREATE TABLE Review
+CREATE TABLE IF NOT EXISTS Review
 (
     Id          INT PRIMARY KEY AUTO_INCREMENT,
     Customer_Id INT NOT NULL,
@@ -70,21 +79,21 @@ CREATE TABLE Review
     FOREIGN KEY (Book_Id) REFERENCES Book (Book_Id)
 );
 
-CREATE TABLE Cart
+CREATE TABLE IF NOT EXISTS Cart
 (
     Id          INT PRIMARY KEY AUTO_INCREMENT,
     User_Id     INT   NOT NULL,
     Book_Id     INT   NOT NULL,
-    Total_Books INT,
-    Total_Price FLOAT NOT NULL,
+    Total_Books INT check ( Total_Books >=0 ),
+    Total_Price FLOAT NOT NULL check ( Total_Price >=0 ),
     Discount    FLOAT
 );
 
-CREATE TABLE Orders
+CREATE TABLE IF NOT EXISTS Orders
 (
     Id           INT PRIMARY KEY AUTO_INCREMENT,
     Cart_Id      INT,
-    Quantity     INT                                                   NOT NULL,
+    Quantity     INT                                                   NOT NULL CHECK ( Quantity >= 0 ),
     Customer_Id  INT,
     Order_Date   DATE                                                  NOT NULL,
     Dest_Address VARCHAR(255)                                          NOT NULL,
@@ -92,7 +101,7 @@ CREATE TABLE Orders
     Payment      BOOLEAN                                               NOT NULL
 );
 
-CREATE TABLE Payment
+CREATE TABLE IF NOT EXISTS Payment
 (
     Id             INT PRIMARY KEY AUTO_INCREMENT,
     Customer_Id    INT,
